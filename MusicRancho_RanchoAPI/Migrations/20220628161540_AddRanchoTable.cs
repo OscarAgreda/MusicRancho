@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MusicRancho_RanchoAPI.Migrations
 {
-    /// <inheritdoc />
     public partial class AddRanchoTable : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -32,8 +30,6 @@ namespace MusicRancho_RanchoAPI.Migrations
                     table.PrimaryKey("PK_Ranchos", x => x.Id);
                 });
         }
-
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

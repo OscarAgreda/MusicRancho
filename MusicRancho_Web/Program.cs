@@ -32,7 +32,6 @@ builder.Services.AddAuthentication
 })
 .AddOpenIdConnect("oidc", options =>
 {
-    //https://gitter.im/IdentityServer/IdentityServer4?at=57504ef76bbc2d1d4df099c8
     options.Authority = builder.Configuration["ServiceUrls:IdentityAPI"];
     options.GetClaimsFromUserInfoEndpoint = true;
     options.ClientId = "music";

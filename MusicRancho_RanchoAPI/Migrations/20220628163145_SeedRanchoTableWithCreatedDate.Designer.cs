@@ -15,7 +15,6 @@ namespace MusicRancho_RanchoAPI.Migrations
     [Migration("20220628163145_SeedRanchoTableWithCreatedDate")]
     partial class SeedRanchoTableWithCreatedDate
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

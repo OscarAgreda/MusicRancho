@@ -30,7 +30,6 @@ builder.Services.AddIdentityServer(options =>
     options.Events.RaiseInformationEvents = true;
     options.Events.RaiseFailureEvents = true;
     options.Events.RaiseSuccessEvents = true;
-    // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
     options.EmitStaticAudienceClaim = true;
 })
 .AddJwtBearerClientAuthentication()
@@ -43,7 +42,6 @@ builder.Services.AddIdentityServer(options =>
 .AddDeveloperSigningCredential()
 .AddProfileService<ProfileService>();
 builder.Services.AddScoped(typeof(IProfileService), typeof(ProfileService));
-//builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddLocalApiAuthentication();
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())

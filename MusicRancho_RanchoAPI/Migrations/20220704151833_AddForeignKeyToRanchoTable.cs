@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MusicRancho_RanchoAPI.Migrations
 {
-    /// <inheritdoc />
     public partial class AddForeignKeyToRanchoTable : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
@@ -66,8 +64,6 @@ namespace MusicRancho_RanchoAPI.Migrations
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
-
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(

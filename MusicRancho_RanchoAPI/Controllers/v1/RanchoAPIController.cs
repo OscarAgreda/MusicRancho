@@ -11,7 +11,6 @@ using static Duende.IdentityServer.IdentityServerConstants;
 using Duende.IdentityServer;
 namespace MusicRancho_RanchoAPI.Controllers.v1
 {
-    //[Route("api/[controller]")]
     [Route("api/v{version:apiVersion}/RanchoAPI")]
     [ApiController]
     [ApiVersion("1.0")]
@@ -71,8 +70,6 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        //[ProducesResponseType(200, Type =typeof(RanchoDTO))]
-        // [ResponseCache(Location =ResponseCacheLocation.None,NoStore =true)]
         public async Task<ActionResult<APIResponse>> GetRancho(int id)
         {
             try
@@ -109,10 +106,6 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
         {
             try
             {
-                //if (!ModelState.IsValid)
-                //{
-                // return BadRequest(ModelState);
-                //}
                 if (await _dbRancho.GetAsync(u => u.Name.ToLower() == createDTO.Name.ToLower()) != null)
                 {
                     ModelState.AddModelError("ErrorMessages", "Rancho already Exists!");
@@ -122,21 +115,7 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
                 {
                     return BadRequest(createDTO);
                 }
-                //if (ranchoDTO.Id > 0)
-                //{
-                // return StatusCode(StatusCodes.Status500InternalServerError);
-                //}
                 Rancho rancho = _mapper.Map<Rancho>(createDTO);
-                //Rancho model = new()
-                //{
-                // Amenity = createDTO.Amenity,
-                // Details = createDTO.Details,
-                // ImageUrl = createDTO.ImageUrl,
-                // Name = createDTO.Name,
-                // Occupancy = createDTO.Occupancy,
-                // Rate = createDTO.Rate,
-                // Sqft = createDTO.Sqft
-                //};
                 await _dbRancho.CreateAsync(rancho);
                 _response.Result = _mapper.Map<RanchoDTO>(rancho);
                 _response.StatusCode = HttpStatusCode.Created;
@@ -184,9 +163,7 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
             return _response;
         }
         [HttpPut("{id:int}", Name = "UpdateRancho")]
-        // [Authorize(Policy = "AdministratorOnly")]
         [Authorize(Policy = "AspManager")]
-        //[Authorize(Policy = "AccessResources1")] // Authorization policy for this API.
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponse>> UpdateRancho(int id, [FromBody] RanchoUpdateDTO updateDTO)

@@ -21,15 +21,11 @@ namespace MusicRancho_Web.Controllers
         }
 
         [HttpGet]
-        [Authorize] // will use this     options.Authority = builder.Configuration["ServiceUrls:IdentityAPI"];
+        [Authorize]
         public async Task<IActionResult> Login()
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
             return RedirectToAction(nameof(Index), "Home");
-            //https://jwt.io/
-            //https://stackoverflow.com/questions/50999498/how-to-get-the-claims-from-the-jwt-token-in-asp-net-core-2-0
-            //LoginRequestDTO obj = new();
-            //return View(obj);
         }
 
         [HttpPost]

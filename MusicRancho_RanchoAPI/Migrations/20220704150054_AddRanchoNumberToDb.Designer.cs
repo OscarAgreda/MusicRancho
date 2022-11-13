@@ -15,7 +15,6 @@ namespace MusicRancho_RanchoAPI.Migrations
     [Migration("20220704150054_AddRanchoNumberToDb")]
     partial class AddRanchoNumberToDb
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

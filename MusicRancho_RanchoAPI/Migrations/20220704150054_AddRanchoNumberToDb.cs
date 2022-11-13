@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MusicRancho_RanchoAPI.Migrations
 {
-    /// <inheritdoc />
     public partial class AddRanchoNumberToDb : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -60,8 +58,6 @@ namespace MusicRancho_RanchoAPI.Migrations
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 4, 10, 0, 54, 527, DateTimeKind.Local).AddTicks(8274));
         }
-
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

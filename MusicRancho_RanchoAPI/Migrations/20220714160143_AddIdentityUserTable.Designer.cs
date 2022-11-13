@@ -15,7 +15,6 @@ namespace MusicRancho_RanchoAPI.Migrations
     [Migration("20220714160143_AddIdentityUserTable")]
     partial class AddIdentityUserTable
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

@@ -25,19 +25,6 @@ ApiSecrets =
 {
 new Secret("dataEventRecordsSecret".Sha256())
 },
-//Scopes =
-//{
-// // add new scope
-// new Scope
-// {
-// name = "dataEventRecords",
-// DisplayName = "Scope for the dataEventRecords",
-// Description = "Allow the application to access dataEventRecords on your behalf",
-// Required = true,
-// Emphasize = true,
-// UserClaims = new List<string> { "role", "email", "name", "age" }
-// }
-//},
 UserClaims = { "role", "dataEventRecords", "dataEventRecords.admin", "dataEventRecords.user" }
 },
 new ApiResource("WebAPI" ) {
@@ -72,10 +59,9 @@ AllowedScopes = { "music", "api1", "api2.read_only", IdentityServerConstants.Loc
 },
 new Client
 {
-// https://docs.identityserver.io/en/latest/reference/client.html
 ClientId = "music",
 RequireClientSecret = false,
-AccessTokenLifetime = 900, // Lifetime of access token in seconds.
+AccessTokenLifetime = 900,
 ClientSecrets = { new Secret("secret".Sha256()) },
 AllowedGrantTypes = GrantTypes.Code,
 AlwaysIncludeUserClaimsInIdToken = true,

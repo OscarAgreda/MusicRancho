@@ -77,7 +77,7 @@ namespace MusicRancho_RanchoAPI.Repository
             {
                 Token = tokenHandler.WriteToken(token),
                 User = _mapper.Map<UserDTO>(user),
-                
+
             };
             return loginResponseDTO;
         }
@@ -97,7 +97,8 @@ namespace MusicRancho_RanchoAPI.Repository
                 var result = await _userManager.CreateAsync(user, registerationRequestDTO.Password);
                 if (result.Succeeded)
                 {
-                    if (!_roleManager.RoleExistsAsync("admin").GetAwaiter().GetResult()){
+                    if (!_roleManager.RoleExistsAsync("admin").GetAwaiter().GetResult())
+                    {
                         await _roleManager.CreateAsync(new IdentityRole("admin"));
                         await _roleManager.CreateAsync(new IdentityRole("customer"));
                     }
@@ -108,7 +109,7 @@ namespace MusicRancho_RanchoAPI.Repository
 
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
 
             }

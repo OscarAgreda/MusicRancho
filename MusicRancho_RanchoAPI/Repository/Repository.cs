@@ -13,7 +13,6 @@ namespace MusicRancho_RanchoAPI.Repository
         public Repository(ApplicationDbContext db)
         {
             _db = db;
-            //_db.RanchoNumbers.Include(u => u.Rancho).ToList();
             this.dbSet=_db.Set<T>();
         }
 
@@ -22,8 +21,6 @@ namespace MusicRancho_RanchoAPI.Repository
             await dbSet.AddAsync(entity);
             await SaveAsync();
         }
-
-        //"Rancho,RanchoSpecial"
         public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, bool tracked = true, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
@@ -61,9 +58,6 @@ namespace MusicRancho_RanchoAPI.Repository
                 {
                     pageSize = 100;
                 }
-                //skip0.take(5)
-                //page number- 2     || page size -5
-                //skip(5*(1)) take(5)
                 query = query.Skip(pageSize * (pageNumber - 1)).Take(pageSize);
             }
             if (includeProperties != null)

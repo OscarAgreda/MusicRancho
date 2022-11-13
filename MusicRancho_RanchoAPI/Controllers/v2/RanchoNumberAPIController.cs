@@ -22,9 +22,6 @@ namespace MusicRancho_RanchoAPI.Controllers.v2
             _response = new();
             _dbRancho = dbRancho;
         }
-
-
-        //[MapToApiVersion("2.0")]
         [HttpGet("GetString")]
         public IEnumerable<string> Get()
         {

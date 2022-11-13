@@ -17,7 +17,6 @@ using MusicRancho_Identity.Policies;
 using IdentityModel;
 using Duende.IdentityServer;
 var builder = WebApplication.CreateBuilder(args);
-// Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
@@ -48,12 +47,10 @@ builder.Services.AddAuthentication(x =>
 })
 .AddJwtBearer(x =>
 {
-    //x.RequireHttpsMetadata = false;
     x.SaveToken = true;
     x.Authority = "https://localhost:7003/";
     x.Audience = "music";
     x.RequireHttpsMetadata = true;
-    //
     x.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
@@ -147,7 +144,6 @@ new List<string>()
 });
 builder.Services.AddAuthorization(opts =>
 {
-    // //https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies?view=aspnetcore-6.0
     opts.AddPolicy("AspManager", policy =>
     {
         policy.RequireAuthenticatedUser();
@@ -166,7 +162,6 @@ builder.Services.AddAuthorization(opts =>
     opts.AddPolicy("AdministratorOnly", policy => policy.RequireClaim(JwtClaimTypes.Role, "geek"));
 });
 var app = builder.Build();
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

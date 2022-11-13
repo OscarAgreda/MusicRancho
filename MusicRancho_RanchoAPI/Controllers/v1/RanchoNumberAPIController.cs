@@ -35,7 +35,6 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
         }
 
         [HttpGet]
-        //[MapToApiVersion("1.0")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetRanchoNumbers()
         {

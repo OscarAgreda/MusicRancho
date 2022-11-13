@@ -42,7 +42,6 @@ public class Index : PageModel
             RoleManager<IdentityRole> roleInManager,
             ApplicationDbContext db)
     {
-        // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
 
         _interaction = interaction;
         _schemeProvider = schemeProvider;

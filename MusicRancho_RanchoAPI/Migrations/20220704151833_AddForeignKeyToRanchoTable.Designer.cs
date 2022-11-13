@@ -15,7 +15,6 @@ namespace MusicRancho_RanchoAPI.Migrations
     [Migration("20220704151833_AddForeignKeyToRanchoTable")]
     partial class AddForeignKeyToRanchoTable
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

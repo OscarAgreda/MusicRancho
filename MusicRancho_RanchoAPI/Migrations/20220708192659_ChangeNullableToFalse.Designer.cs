@@ -15,7 +15,6 @@ namespace MusicRancho_RanchoAPI.Migrations
     [Migration("20220708192659_ChangeNullableToFalse")]
     partial class ChangeNullableToFalse
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618

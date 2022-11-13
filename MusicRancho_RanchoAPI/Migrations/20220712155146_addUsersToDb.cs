@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MusicRancho_RanchoAPI.Migrations
 {
-    /// <inheritdoc />
     public partial class addUsersToDb : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -62,8 +60,6 @@ namespace MusicRancho_RanchoAPI.Migrations
                 columns: new[] { "CreatedDate", "ImageUrl" },
                 values: new object[] { new DateTime(2022, 7, 12, 10, 51, 46, 107, DateTimeKind.Local).AddTicks(7564), "https://someWebSite.com/blueranchoimages/rancho2.jpg" });
         }
-
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

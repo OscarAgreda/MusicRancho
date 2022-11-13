@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MusicRancho_RanchoAPI.Migrations
 {
-    /// <inheritdoc />
     public partial class ChangeNullableToFalse : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
@@ -78,8 +76,6 @@ namespace MusicRancho_RanchoAPI.Migrations
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 8, 14, 26, 58, 968, DateTimeKind.Local).AddTicks(5079));
         }
-
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
