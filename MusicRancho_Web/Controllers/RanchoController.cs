@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Reflection;
-
 namespace MusicRancho_Web.Controllers
 {
     public class RanchoController : Controller
@@ -24,7 +23,6 @@ namespace MusicRancho_Web.Controllers
         public async Task<IActionResult> IndexRancho()
         {
             List<RanchoDTO> list = new();
-
             var response = await _ranchoService.GetAllAsync<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
             if (response != null && response.IsSuccess)
             {
@@ -32,9 +30,7 @@ namespace MusicRancho_Web.Controllers
             }
             return View(list);
         }
-
         [Authorize(Roles = "admin")]
-
         public async Task<IActionResult> CreateRancho()
         {
             return View();
@@ -46,7 +42,6 @@ namespace MusicRancho_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var response = await _ranchoService.CreateAsync<APIResponse>(model, await HttpContext.GetTokenAsync("access_token"));
                 if (response != null && response.IsSuccess)
                 {
@@ -63,7 +58,6 @@ namespace MusicRancho_Web.Controllers
             var response = await _ranchoService.GetAsync<APIResponse>(ranchoId, await HttpContext.GetTokenAsync("access_token"));
             if (response != null && response.IsSuccess)
             {
-
                 RanchoDTO model = JsonConvert.DeserializeObject<RanchoDTO>(Convert.ToString(response.Result));
                 return View(_mapper.Map<RanchoUpdateDTO>(model));
             }
@@ -102,7 +96,6 @@ namespace MusicRancho_Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteRancho(RanchoDTO model)
         {
-
             var response = await _ranchoService.DeleteAsync<APIResponse>(model.Id, await HttpContext.GetTokenAsync("access_token"));
             if (response != null && response.IsSuccess)
             {
@@ -112,6 +105,5 @@ namespace MusicRancho_Web.Controllers
             TempData["error"] = "Error encountered.";
             return View(model);
         }
-
     }
 }

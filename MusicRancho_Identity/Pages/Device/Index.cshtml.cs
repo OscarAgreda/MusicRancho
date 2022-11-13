@@ -9,9 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
-
 namespace UI.Pages.Device;
-
 [SecurityHeaders]
 [Authorize]
 public class Index : PageModel
@@ -20,7 +18,6 @@ public class Index : PageModel
     private readonly IEventService _events;
     private readonly IOptions<IdentityServerOptions> _options;
     private readonly ILogger<Index> _logger;
-
     public Index(
         IDeviceFlowInteractionService interaction,
         IEventService eventService,
@@ -32,12 +29,9 @@ public class Index : PageModel
         _options = options;
         _logger = logger;
     }
-
     public ViewModel View { get; set; }
-
     [BindProperty]
     public InputModel Input { get; set; }
-
     public async Task<IActionResult> OnGet(string userCode)
     {
         if (String.IsNullOrWhiteSpace(userCode))
@@ -46,7 +40,6 @@ public class Index : PageModel
             Input = new InputModel();
             return Page();
         }
-
         View = await BuildViewModelAsync(userCode);
         if (View == null)
         {
@@ -55,20 +48,16 @@ public class Index : PageModel
             Input = new InputModel();
             return Page();
         }
-
         Input = new InputModel
         {
             UserCode = userCode,
         };
-
         return Page();
     }
-
     public async Task<IActionResult> OnPost()
     {
         var request = await _interaction.GetAuthorizationContextAsync(Input.UserCode);
         if (request == null) return RedirectToPage("/Home/Error/Index");
-
         ConsentResponse grantedConsent = null;
         if (Input.Button == "no")
         {
@@ -87,7 +76,6 @@ public class Index : PageModel
                 {
                     scopes = scopes.Where(x => x != Duende.IdentityServer.IdentityServerConstants.StandardScopes.OfflineAccess);
                 }
-
                 grantedConsent = new ConsentResponse
                 {
                     RememberConsent = Input.RememberConsent,
@@ -105,7 +93,6 @@ public class Index : PageModel
         {
             ModelState.AddModelError("", ConsentOptions.InvalidSelectionErrorMessage);
         }
-
         if (grantedConsent != null)
         {
             await _interaction.HandleRequestAsync(Input.UserCode, grantedConsent);
@@ -114,8 +101,6 @@ public class Index : PageModel
         View = await BuildViewModelAsync(Input.UserCode, Input);
         return Page();
     }
-
-
     private async Task<ViewModel> BuildViewModelAsync(string userCode, InputModel model = null)
     {
         var request = await _interaction.GetAuthorizationContextAsync(userCode);
@@ -123,10 +108,8 @@ public class Index : PageModel
         {
             return CreateConsentViewModel(model, request);
         }
-
         return null;
     }
-
     private ViewModel CreateConsentViewModel(InputModel model, DeviceFlowAuthorizationRequest request)
     {
         var vm = new ViewModel
@@ -136,9 +119,7 @@ public class Index : PageModel
             ClientLogoUrl = request.Client.LogoUri,
             AllowRememberConsent = request.Client.AllowRememberConsent
         };
-
         vm.IdentityScopes = request.ValidatedResources.Resources.IdentityResources.Select(x => CreateScopeViewModel(x, model == null || model.ScopesConsented?.Contains(x.Name) == true)).ToArray();
-
         var apiScopes = new List<ScopeViewModel>();
         foreach (var parsedScope in request.ValidatedResources.ParsedScopes)
         {
@@ -154,10 +135,8 @@ public class Index : PageModel
             apiScopes.Add(GetOfflineAccessScope(model == null || model.ScopesConsented?.Contains(Duende.IdentityServer.IdentityServerConstants.StandardScopes.OfflineAccess) == true));
         }
         vm.ApiScopes = apiScopes;
-
         return vm;
     }
-
     private ScopeViewModel CreateScopeViewModel(IdentityResource identity, bool check)
     {
         return new ScopeViewModel
@@ -170,7 +149,6 @@ public class Index : PageModel
             Checked = check || identity.Required
         };
     }
-
     public ScopeViewModel CreateScopeViewModel(ParsedScopeValue parsedScopeValue, ApiScope apiScope, bool check)
     {
         return new ScopeViewModel
@@ -183,7 +161,6 @@ public class Index : PageModel
             Checked = check || apiScope.Required
         };
     }
-
     private ScopeViewModel GetOfflineAccessScope(bool check)
     {
         return new ScopeViewModel

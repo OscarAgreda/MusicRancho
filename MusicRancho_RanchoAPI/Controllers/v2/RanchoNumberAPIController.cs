@@ -2,7 +2,6 @@ using AutoMapper;
 using MusicRancho_RanchoAPI.Models;
 using MusicRancho_RanchoAPI.Repository.IRepostiory;
 using Microsoft.AspNetCore.Mvc;
-
 namespace MusicRancho_RanchoAPI.Controllers.v2
 {
     [Route("api/v{version:apiVersion}/RanchoNumberAPI")]
@@ -27,7 +26,5 @@ namespace MusicRancho_RanchoAPI.Controllers.v2
         {
             return new string[] { "Bhrugen", "DotNetMastery" };
         }
-
-
     }
 }

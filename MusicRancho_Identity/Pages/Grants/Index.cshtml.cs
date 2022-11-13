@@ -6,9 +6,7 @@ using Duende.IdentityServer.Stores;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
 namespace UI.Pages.Grants;
-
 [SecurityHeaders]
 [Authorize]
 public class Index : PageModel
@@ -17,7 +15,6 @@ public class Index : PageModel
     private readonly IClientStore _clients;
     private readonly IResourceStore _resources;
     private readonly IEventService _events;
-
     public Index(IIdentityServerInteractionService interaction,
         IClientStore clients,
         IResourceStore resources,
@@ -28,13 +25,10 @@ public class Index : PageModel
         _resources = resources;
         _events = events;
     }
-
     public ViewModel View { get; set; }
-        
     public async Task OnGet()
     {
         var grants = await _interaction.GetAllUserGrantsAsync();
-
         var list = new List<GrantViewModel>();
         foreach (var grant in grants)
         {
@@ -42,7 +36,6 @@ public class Index : PageModel
             if (client != null)
             {
                 var resources = await _resources.FindResourcesByScopeAsync(grant.Scopes);
-
                 var item = new GrantViewModel()
                 {
                     ClientId = client.ClientId,
@@ -55,26 +48,21 @@ public class Index : PageModel
                     IdentityGrantNames = resources.IdentityResources.Select(x => x.DisplayName ?? x.Name).ToArray(),
                     ApiGrantNames = resources.ApiScopes.Select(x => x.DisplayName ?? x.Name).ToArray()
                 };
-
                 list.Add(item);
             }
         }
-
         View = new ViewModel
         {
             Grants = list
         };
     }
-
     [BindProperty]
     [Required]
     public string ClientId { get; set; }
-
     public async Task<IActionResult> OnPost()
     {
         await _interaction.RevokeUserConsentAsync(ClientId);
         await _events.RaiseAsync(new GrantsRevokedEvent(User.GetSubjectId(), ClientId));
-
         return RedirectToPage("/Grants/Index");
     }
 }

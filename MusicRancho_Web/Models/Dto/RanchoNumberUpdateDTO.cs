@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-
 namespace MusicRancho_Web.Models.Dto
 {
     public class RanchoNumberUpdateDTO

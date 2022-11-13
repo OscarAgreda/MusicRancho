@@ -1,11 +1,7 @@
 // Copyright (c) Duende Software. All rights reserved.
-
-
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
 namespace UI.Pages;
-
 public class SecurityHeadersAttribute : ActionFilterAttribute
 {
     public override void OnResultExecuting(ResultExecutingContext context)

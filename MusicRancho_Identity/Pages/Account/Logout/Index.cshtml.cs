@@ -8,9 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
 namespace UI.Pages.Logout;
-
 [SecurityHeaders]
 [AllowAnonymous]
 public class Index : PageModel
@@ -20,7 +18,6 @@ public class Index : PageModel
     private readonly SignInManager<ApplicationUser> _signInManager;
     [BindProperty]
     public string LogoutId { get; set; }
-
     public Index(IIdentityServerInteractionService interaction, IEventService events,
         SignInManager<ApplicationUser> signInManager)
     {
@@ -28,13 +25,10 @@ public class Index : PageModel
         _interaction = interaction;
         _events = events;
     }
-
     public async Task<IActionResult> OnGet(string logoutId)
     {
         LogoutId = logoutId;
-
         var showLogoutPrompt = LogoutOptions.ShowLogoutPrompt;
-
         if (User?.Identity.IsAuthenticated != true)
         {
             showLogoutPrompt = false;
@@ -47,15 +41,12 @@ public class Index : PageModel
                 showLogoutPrompt = false;
             }
         }
-
         if (showLogoutPrompt == false)
         {
             return await OnPost();
         }
-
         return Page();
     }
-
     public async Task<IActionResult> OnPost()
     {
         if (User?.Identity.IsAuthenticated == true)
@@ -74,7 +65,6 @@ public class Index : PageModel
                 }
             }
         }
-
         return RedirectToPage("/Account/Logout/LoggedOut", new { logoutId = LogoutId });
     }
 }

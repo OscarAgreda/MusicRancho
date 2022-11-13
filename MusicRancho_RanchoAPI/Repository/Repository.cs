@@ -3,7 +3,6 @@ using MusicRancho_RanchoAPI.Models;
 using MusicRancho_RanchoAPI.Repository.IRepostiory;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-
 namespace MusicRancho_RanchoAPI.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
@@ -15,7 +14,6 @@ namespace MusicRancho_RanchoAPI.Repository
             _db = db;
             this.dbSet=_db.Set<T>();
         }
-
         public async Task CreateAsync(T entity)
         {
             await dbSet.AddAsync(entity);
@@ -32,7 +30,6 @@ namespace MusicRancho_RanchoAPI.Repository
             {
                 query = query.Where(filter);
             }
-            
             if (includeProperties != null)
             {
                 foreach(var includeProp in includeProperties.Split(new char[] { ','}, StringSplitOptions.RemoveEmptyEntries))
@@ -42,12 +39,10 @@ namespace MusicRancho_RanchoAPI.Repository
             }
             return await query.FirstOrDefaultAsync();
         }
-
         public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null,
             int pageSize = 0, int pageNumber = 1)
         {
             IQueryable<T> query = dbSet;
-
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -69,18 +64,14 @@ namespace MusicRancho_RanchoAPI.Repository
             }
             return await query.ToListAsync();
         }
-
         public async Task RemoveAsync(T entity)
         {
             dbSet.Remove(entity);
             await SaveAsync();
         }
-
         public async Task SaveAsync()
         {
             await _db.SaveChangesAsync();
         }
-
-       
     }
 }

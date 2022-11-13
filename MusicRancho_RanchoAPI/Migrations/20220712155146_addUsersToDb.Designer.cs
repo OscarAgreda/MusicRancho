@@ -6,9 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
 #nullable disable
-
 namespace MusicRancho_RanchoAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
@@ -21,74 +19,51 @@ namespace MusicRancho_RanchoAPI.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-preview.5.22302.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
             modelBuilder.Entity("MusicRancho_RanchoAPI.Models.LocalUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
-
                     b.ToTable("LocalUsers");
                 });
-
             modelBuilder.Entity("MusicRancho_RanchoAPI.Models.Rancho", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
                     b.Property<string>("Amenity")
                         .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
                     b.Property<string>("Details")
                         .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Occupancy")
                         .HasColumnType("int");
-
                     b.Property<double>("Rate")
                         .HasColumnType("float");
-
                     b.Property<int>("Sqft")
                         .HasColumnType("int");
-
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
-
                     b.HasKey("Id");
-
                     b.ToTable("Ranchos");
-
                     b.HasData(
                         new
                         {
@@ -156,31 +131,22 @@ namespace MusicRancho_RanchoAPI.Migrations
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
-
             modelBuilder.Entity("MusicRancho_RanchoAPI.Models.RanchoNumber", b =>
                 {
                     b.Property<int>("RanchoNo")
                         .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
                     b.Property<string>("SpecialDetails")
                         .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
-
                     b.Property<int>("RanchoID")
                         .HasColumnType("int");
-
                     b.HasKey("RanchoNo");
-
                     b.HasIndex("RanchoID");
-
                     b.ToTable("RanchoNumbers");
                 });
-
             modelBuilder.Entity("MusicRancho_RanchoAPI.Models.RanchoNumber", b =>
                 {
                     b.HasOne("MusicRancho_RanchoAPI.Models.Rancho", "Rancho")
@@ -188,7 +154,6 @@ namespace MusicRancho_RanchoAPI.Migrations
                         .HasForeignKey("RanchoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
                     b.Navigation("Rancho");
                 });
 #pragma warning restore 612, 618

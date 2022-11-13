@@ -2,21 +2,17 @@ using MusicRancho_Utility;
 using MusicRancho_Web.Models;
 using MusicRancho_Web.Models.Dto;
 using MusicRancho_Web.Services.IServices;
-
 namespace MusicRancho_Web.Services
 {
     public class RanchoService : BaseService, IRanchoService
     {
         private readonly IHttpClientFactory _clientFactory;
         private string ranchoUrl;
-
         public RanchoService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
         {
             _clientFactory = clientFactory;
             ranchoUrl = configuration.GetValue<string>("ServiceUrls:RanchoAPI");
-
         }
-
         public Task<T> CreateAsync<T>(RanchoCreateDTO dto, string token)
         {
             return SendAsync<T>(new APIRequest()
@@ -27,7 +23,6 @@ namespace MusicRancho_Web.Services
                 Token = token
             });
         }
-
         public Task<T> DeleteAsync<T>(int id, string token)
         {
             return SendAsync<T>(new APIRequest()
@@ -37,7 +32,6 @@ namespace MusicRancho_Web.Services
                 Token = token
             });
         }
-
         public Task<T> GetAllAsync<T>(string token)
         {
             return SendAsync<T>(new APIRequest()
@@ -47,7 +41,6 @@ namespace MusicRancho_Web.Services
                 Token = token
             });
         }
-
         public Task<T> GetAsync<T>(int id, string token)
         {
             return SendAsync<T>(new APIRequest()
@@ -57,7 +50,6 @@ namespace MusicRancho_Web.Services
                 Token = token
             });
         }
-
         public Task<T> UpdateAsync<T>(RanchoUpdateDTO dto, string token)
         {
             return SendAsync<T>(new APIRequest()

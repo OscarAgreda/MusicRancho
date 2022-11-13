@@ -1,6 +1,5 @@
 using MusicRancho_RanchoAPI.Models;
 using MusicRancho_RanchoAPI.Models.Dto;
-
 namespace MusicRancho_RanchoAPI.Repository.IRepostiory
 {
     public interface IUserRepository

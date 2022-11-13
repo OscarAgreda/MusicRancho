@@ -1,4 +1,3 @@
-
 using MusicRancho_RanchoAPI;
 using MusicRancho_RanchoAPI.Data;
 using MusicRancho_RanchoAPI.Repository.IRepostiory;
@@ -154,10 +153,8 @@ builder.Services.AddAuthorization(opts =>
         policy.RequireClaim("marca_de_carro");
         policy.RequireRole(new string[] { "admin", "superuser", "geek" });
     });
-
     //https://www.google.com/search?q=HandleRequirementAsync(AuthorizationHandlerContext
     //    options.AddPolicy("AtLeast18", policy => policy.Requirements.Add(new MinimumAgeRequirement(18)));
-
     opts.AddPolicy("AtLeast18", policy => policy.Requirements.Add(new MinimumAgeRequirement(18)));
     opts.AddPolicy("AdministratorOnly", policy => policy.RequireClaim(JwtClaimTypes.Role, "geek"));
 });

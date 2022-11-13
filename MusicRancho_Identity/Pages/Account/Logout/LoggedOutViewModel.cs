@@ -1,8 +1,4 @@
-
-
-
 namespace UI.Pages.Logout;
-
 public class LoggedOutViewModel
 {
     public string PostLogoutRedirectUri { get; set; }

@@ -8,7 +8,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-
 namespace MusicRancho_RanchoAPI.Repository
 {
     public class UserRepository : IUserRepository
@@ -18,7 +17,6 @@ namespace MusicRancho_RanchoAPI.Repository
         private readonly RoleManager<IdentityRole> _roleManager;
         private string secretKey;
         private readonly IMapper _mapper;
-
         public UserRepository(ApplicationDbContext db, IConfiguration configuration,
             UserManager<ApplicationUser> userManager, IMapper mapper, RoleManager<IdentityRole> roleManager)
         {
@@ -28,7 +26,6 @@ namespace MusicRancho_RanchoAPI.Repository
             secretKey = configuration.GetValue<string>("ApiSettings:Secret");
             _roleManager = roleManager;
         }
-
         public bool IsUniqueUser(string username)
         {
             var user = _db.ApplicationUsers.FirstOrDefault(x => x.UserName == username);
@@ -38,15 +35,11 @@ namespace MusicRancho_RanchoAPI.Repository
             }
             return false;
         }
-
         public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO)
         {
             var user = _db.ApplicationUsers
                 .FirstOrDefault(u => u.UserName.ToLower() == loginRequestDTO.UserName.ToLower());
-
             bool isValid = await _userManager.CheckPasswordAsync(user, loginRequestDTO.Password);
-
-
             if (user == null || isValid == false)
             {
                 return new LoginResponseDTO()
@@ -55,12 +48,10 @@ namespace MusicRancho_RanchoAPI.Repository
                     User = null
                 };
             }
-
             //if user was found generate JWT Token
             var roles = await _userManager.GetRolesAsync(user);
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(secretKey);
-
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -71,17 +62,14 @@ namespace MusicRancho_RanchoAPI.Repository
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
-
             var token = tokenHandler.CreateToken(tokenDescriptor);
             LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
             {
                 Token = tokenHandler.WriteToken(token),
                 User = _mapper.Map<UserDTO>(user),
-
             };
             return loginResponseDTO;
         }
-
         public async Task<UserDTO> Register(RegisterationRequestDTO registerationRequestDTO)
         {
             ApplicationUser user = new()
@@ -91,7 +79,6 @@ namespace MusicRancho_RanchoAPI.Repository
                 NormalizedEmail=registerationRequestDTO.UserName.ToUpper(),
                 Name = registerationRequestDTO.Name
             };
-
             try
             {
                 var result = await _userManager.CreateAsync(user, registerationRequestDTO.Password);
@@ -106,14 +93,11 @@ namespace MusicRancho_RanchoAPI.Repository
                     var userToReturn = _db.ApplicationUsers
                         .FirstOrDefault(u => u.UserName == registerationRequestDTO.UserName);
                     return _mapper.Map<UserDTO>(userToReturn);
-
                 }
             }
             catch (Exception e)
             {
-
             }
-
             return new UserDTO();
         }
     }

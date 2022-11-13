@@ -1,5 +1,4 @@
 using MusicRancho_Web.Models.Dto;
-
 namespace MusicRancho_Web.Services.IServices
 {
     public interface IAuthService

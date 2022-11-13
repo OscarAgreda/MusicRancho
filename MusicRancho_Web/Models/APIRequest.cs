@@ -1,5 +1,4 @@
 using static MusicRancho_Utility.SD;
-
 namespace MusicRancho_Web.Models
 {
     public class APIRequest

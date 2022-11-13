@@ -1,5 +1,4 @@
 using System.Net;
-
 namespace MusicRancho_Web.Models
 {
     public class APIResponse

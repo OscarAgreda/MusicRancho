@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authorization;
-
 namespace MusicRancho_Identity.Policies
 {
     public class MinimumAgeHandler : AuthorizationHandler<MinimumAgeRequirement>
@@ -10,18 +9,12 @@ namespace MusicRancho_Identity.Policies
             {
                 return Task.CompletedTask;
             }
-
-
             var age = int.Parse(context.User.FindFirst(c => c.Type == "Age").Value);
-
             if (age >= requirement.MinimumAge)
             {
                 context.Succeed(requirement);
             }
-
-
             return Task.CompletedTask;
         }
     }
-
 }

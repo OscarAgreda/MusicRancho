@@ -6,9 +6,7 @@ using Duende.IdentityServer.Validation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
 namespace UI.Pages.Ciba;
-
 [Authorize]
 [SecurityHeadersAttribute]
 public class Consent : PageModel
@@ -16,7 +14,6 @@ public class Consent : PageModel
     private readonly IBackchannelAuthenticationInteractionService _interaction;
     private readonly IEventService _events;
     private readonly ILogger<Consent> _logger;
-
     public Consent(
         IBackchannelAuthenticationInteractionService interaction,
         IEventService events,
@@ -26,12 +23,9 @@ public class Consent : PageModel
         _events = events;
         _logger = logger;
     }
-
     public ViewModel View { get; set; }
-
     [BindProperty]
     public InputModel Input { get; set; }
-
     public async Task<IActionResult> OnGet(string id)
     {
         View = await BuildViewModelAsync(id);
@@ -39,15 +33,12 @@ public class Consent : PageModel
         {
             return RedirectToPage("/Home/Error/Index");
         }
-
         Input = new InputModel
         {
             Id = id
         };
-
         return Page();
     }
-
     public async Task<IActionResult> OnPost()
     {
         var request = await _interaction.GetLoginRequestByInternalIdAsync(Input.Id);
@@ -56,7 +47,6 @@ public class Consent : PageModel
             _logger.LogError("Invalid id {id}", Input.Id);
             return RedirectToPage("/Home/Error/Index");
         }
-
         CompleteBackchannelLoginRequest result = null;
         if (Input?.Button == "no")
         {
@@ -72,7 +62,6 @@ public class Consent : PageModel
                 {
                     scopes = scopes.Where(x => x != Duende.IdentityServer.IdentityServerConstants.StandardScopes.OfflineAccess);
                 }
-
                 result = new CompleteBackchannelLoginRequest(Input.Id)
                 {
                     ScopesValuesConsented = scopes.ToArray(),
@@ -89,17 +78,14 @@ public class Consent : PageModel
         {
             ModelState.AddModelError("", ConsentOptions.InvalidSelectionErrorMessage);
         }
-
         if (result != null)
         {
             await _interaction.CompleteLoginRequestAsync(result);
-
             return RedirectToPage("/Ciba/All");
         }
         View = await BuildViewModelAsync(Input.Id, Input);
         return Page();
     }
-
     private async Task<ViewModel> BuildViewModelAsync(string id, InputModel model = null)
     {
         var request = await _interaction.GetLoginRequestByInternalIdAsync(id);
@@ -113,7 +99,6 @@ public class Consent : PageModel
         }
         return null;
     }
-
     private ViewModel CreateConsentViewModel(
         InputModel model, string id,
         BackchannelUserLoginRequest request)
@@ -125,14 +110,11 @@ public class Consent : PageModel
             ClientLogoUrl = request.Client.LogoUri,
             BindingMessage = request.BindingMessage
         };
-
         vm.IdentityScopes = request.ValidatedResources.Resources.IdentityResources
             .Select(x => CreateScopeViewModel(x, model?.ScopesConsented == null || model.ScopesConsented?.Contains(x.Name) == true))
             .ToArray();
-
         var resourceIndicators = request.RequestedResourceIndicators ?? Enumerable.Empty<string>();
         var apiResources = request.ValidatedResources.Resources.ApiResources.Where(x => resourceIndicators.Contains(x.Name));
-
         var apiScopes = new List<ScopeViewModel>();
         foreach (var parsedScope in request.ValidatedResources.ParsedScopes)
         {
@@ -154,10 +136,8 @@ public class Consent : PageModel
             apiScopes.Add(GetOfflineAccessScope(model == null || model.ScopesConsented?.Contains(Duende.IdentityServer.IdentityServerConstants.StandardScopes.OfflineAccess) == true));
         }
         vm.ApiScopes = apiScopes;
-
         return vm;
     }
-
     private ScopeViewModel CreateScopeViewModel(IdentityResource identity, bool check)
     {
         return new ScopeViewModel
@@ -171,7 +151,6 @@ public class Consent : PageModel
             Checked = check || identity.Required
         };
     }
-
     public ScopeViewModel CreateScopeViewModel(ParsedScopeValue parsedScopeValue, ApiScope apiScope, bool check)
     {
         var displayName = apiScope.DisplayName ?? apiScope.Name;
@@ -179,7 +158,6 @@ public class Consent : PageModel
         {
             displayName += ":" + parsedScopeValue.ParsedParameter;
         }
-
         return new ScopeViewModel
         {
             Name = parsedScopeValue.ParsedName,
@@ -191,7 +169,6 @@ public class Consent : PageModel
             Checked = check || apiScope.Required
         };
     }
-
     private ScopeViewModel GetOfflineAccessScope(bool check)
     {
         return new ScopeViewModel

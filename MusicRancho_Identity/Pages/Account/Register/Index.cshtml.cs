@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
-
 namespace MusicRancho_Identity.Pages.Account.Register
 {
     public class IndexModel : PageModel
@@ -12,7 +11,6 @@ namespace MusicRancho_Identity.Pages.Account.Register
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-
         public IndexModel(
             UserManager<ApplicationUser> userManager,
                 SignInManager<ApplicationUser> signInManager,
@@ -23,12 +21,8 @@ namespace MusicRancho_Identity.Pages.Account.Register
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
-
         [BindProperty]
         public RegisterViewModel Input { get; set; }
-
-
         public async Task<IActionResult> OnGet(string returnUrl)
         {
             List<string> roles = new()
@@ -43,7 +37,6 @@ namespace MusicRancho_Identity.Pages.Account.Register
             };
             return Page();
         }
-
         public async Task<IActionResult> OnPost(string returnUrl)
         {
             if (ModelState.IsValid)
@@ -55,9 +48,7 @@ namespace MusicRancho_Identity.Pages.Account.Register
                     EmailConfirmed = true,
                     Name = Input.Name,
                 };
-
                 var result = await _userManager.CreateAsync(user, Input.Password);
-
                 if (result.Succeeded)
                 {
                     if (!_roleManager.RoleExistsAsync(Input.RoleName).GetAwaiter().GetResult())
@@ -66,22 +57,17 @@ namespace MusicRancho_Identity.Pages.Account.Register
                         {
                             Name = Input.RoleName,
                             NormalizedName = Input.RoleName,
-
                         };
                         await _roleManager.CreateAsync(userRole);
                     }
                     await _userManager.AddToRoleAsync(user, Input.RoleName);
-
-
                     await _userManager.AddClaimsAsync(user, new Claim[] {
                         new Claim(JwtClaimTypes.Name,Input.Email),
                         new Claim(JwtClaimTypes.Email,Input.Email),
                         new Claim(JwtClaimTypes.Role,Input.RoleName)
                     });
-
                     var loginresult = await _signInManager.PasswordSignInAsync(
                         Input.Email, Input.Password, false, lockoutOnFailure: true);
-
                     if (loginresult.Succeeded)
                     {
                         if (Url.IsLocalUrl(Input.ReturnUrl))
@@ -96,26 +82,21 @@ namespace MusicRancho_Identity.Pages.Account.Register
                         {
                             throw new Exception("invalid return URL");
                         }
-
                     }
-
                 }
                 else
                 {
                     var errors = result.Errors.Select(e => e.Description);
-
                     var errorStr = string.Empty;
                     foreach (var error in errors)
                     {
                         errorStr = errorStr + error + " ";
                     }
-
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
                     throw new Exception(errorStr);
-
                 }
             }
             return Page();

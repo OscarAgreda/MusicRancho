@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Reflection.Emit;
-
 namespace MusicRancho_Identity.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -12,9 +11,6 @@ namespace MusicRancho_Identity.Data
 : base(options)
 {
 }
-
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-
-     
     }
 }

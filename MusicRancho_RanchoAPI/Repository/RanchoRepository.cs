@@ -3,7 +3,6 @@ using MusicRancho_RanchoAPI.Models;
 using MusicRancho_RanchoAPI.Repository.IRepostiory;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-
 namespace MusicRancho_RanchoAPI.Repository
 {
     public class RanchoRepository : Repository<Rancho>, IRanchoRepository
@@ -13,8 +12,6 @@ namespace MusicRancho_RanchoAPI.Repository
         {
             _db = db;
         }
-
-  
         public async Task<Rancho> UpdateAsync(Rancho entity)
         {
             entity.UpdatedDate = DateTime.Now;

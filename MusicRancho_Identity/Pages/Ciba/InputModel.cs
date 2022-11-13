@@ -1,7 +1,5 @@
 // Copyright (c) Duende Software. All rights reserved.
-
 namespace UI.Pages.Ciba;
-
 public class InputModel
 {
     public string Button { get; set; }

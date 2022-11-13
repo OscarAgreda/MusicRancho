@@ -1,7 +1,6 @@
 using MusicRancho_RanchoAPI.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
 namespace MusicRancho_RanchoAPI.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -10,13 +9,10 @@ namespace MusicRancho_RanchoAPI.Data
             : base(options)
         {
         }
-
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-
         // public DbSet<LocalUser> LocalUsers { get; set; }
         public DbSet<Rancho> Ranchos { get; set; }
         public DbSet<RanchoNumber> RanchoNumbers { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

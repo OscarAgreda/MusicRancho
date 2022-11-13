@@ -3,7 +3,6 @@ using MusicRancho_RanchoAPI.Models.Dto;
 using MusicRancho_RanchoAPI.Repository.IRepostiory;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-
 namespace MusicRancho_RanchoAPI.Controllers
 {
     [Route("api/v{version:apiVersion}/UsersAuth")]
@@ -18,7 +17,6 @@ namespace MusicRancho_RanchoAPI.Controllers
             _userRepo = userRepo;
             _response = new();
         }
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)
         {
@@ -35,7 +33,6 @@ namespace MusicRancho_RanchoAPI.Controllers
             _response.Result = loginResponse;
             return Ok(_response);
         }
-
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterationRequestDTO model)
         {
@@ -47,7 +44,6 @@ namespace MusicRancho_RanchoAPI.Controllers
                 _response.ErrorMessages.Add("Username already exists");
                 return BadRequest(_response);
             }
-
             var user = await _userRepo.Register(model);
             if (user == null)
             {

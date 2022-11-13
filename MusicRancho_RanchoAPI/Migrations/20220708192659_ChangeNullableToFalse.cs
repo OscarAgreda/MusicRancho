@@ -1,8 +1,6 @@
 using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-
 #nullable disable
-
 namespace MusicRancho_RanchoAPI.Migrations
 {
     public partial class ChangeNullableToFalse : Migration
@@ -16,7 +14,6 @@ namespace MusicRancho_RanchoAPI.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
-
             migrationBuilder.AlterColumn<string>(
                 name: "Details",
                 table: "Ranchos",
@@ -24,7 +21,6 @@ namespace MusicRancho_RanchoAPI.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
-
             migrationBuilder.AlterColumn<string>(
                 name: "Amenity",
                 table: "Ranchos",
@@ -32,7 +28,6 @@ namespace MusicRancho_RanchoAPI.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
-
             migrationBuilder.AlterColumn<string>(
                 name: "SpecialDetails",
                 table: "RanchoNumbers",
@@ -40,35 +35,30 @@ namespace MusicRancho_RanchoAPI.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 8, 14, 26, 58, 968, DateTimeKind.Local).AddTicks(4984));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 8, 14, 26, 58, 968, DateTimeKind.Local).AddTicks(5072));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 8, 14, 26, 58, 968, DateTimeKind.Local).AddTicks(5075));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 8, 14, 26, 58, 968, DateTimeKind.Local).AddTicks(5077));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
@@ -87,7 +77,6 @@ namespace MusicRancho_RanchoAPI.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
-
             migrationBuilder.AlterColumn<string>(
                 name: "Details",
                 table: "Ranchos",
@@ -97,7 +86,6 @@ namespace MusicRancho_RanchoAPI.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
-
             migrationBuilder.AlterColumn<string>(
                 name: "Amenity",
                 table: "Ranchos",
@@ -107,7 +95,6 @@ namespace MusicRancho_RanchoAPI.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
-
             migrationBuilder.AlterColumn<string>(
                 name: "SpecialDetails",
                 table: "RanchoNumbers",
@@ -117,35 +104,30 @@ namespace MusicRancho_RanchoAPI.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 4, 10, 18, 33, 293, DateTimeKind.Local).AddTicks(9630));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 4, 10, 18, 33, 293, DateTimeKind.Local).AddTicks(9681));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 4, 10, 18, 33, 293, DateTimeKind.Local).AddTicks(9684));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 4, 10, 18, 33, 293, DateTimeKind.Local).AddTicks(9686));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",

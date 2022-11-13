@@ -1,5 +1,4 @@
 namespace UI.Pages.Device;
-
 public class InputModel
 {
     public string Button { get; set; }

@@ -5,13 +5,11 @@ using MusicRancho_RanchoAPI.Repository.IRepostiory;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-
 namespace MusicRancho_RanchoAPI.Controllers.v1
 {
     [Route("api/v{version:apiVersion}/RanchoNumberAPI")]
     [ApiController]
     [ApiVersion("1.0")]
-
     public class RanchoNumberAPIController : ControllerBase
     {
         protected APIResponse _response;
@@ -26,26 +24,21 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
             _response = new();
             _dbRancho = dbRancho;
         }
-
-
         [HttpGet("GetString")]
         public IEnumerable<string> Get()
         {
             return new string[] { "String1", "string2" };
         }
-
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetRanchoNumbers()
         {
             try
             {
-
                 IEnumerable<RanchoNumber> ranchoNumberList = await _dbRanchoNumber.GetAllAsync(includeProperties: "Rancho");
                 _response.Result = _mapper.Map<List<RanchoNumberDTO>>(ranchoNumberList);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
-
             }
             catch (Exception ex)
             {
@@ -54,10 +47,7 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
                      = new List<string>() { ex.ToString() };
             }
             return _response;
-
         }
-
-
         [HttpGet("{id:int}", Name = "GetRanchoNumber")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -98,7 +88,6 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
         {
             try
             {
-
                 if (await _dbRanchoNumber.GetAsync(u => u.RanchoNo == createDTO.RanchoNo) != null)
                 {
                     ModelState.AddModelError("ErrorMessages", "Rancho Number already Exists!");
@@ -113,10 +102,7 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
                 {
                     return BadRequest(createDTO);
                 }
-
                 RanchoNumber ranchoNumber = _mapper.Map<RanchoNumber>(createDTO);
-
-
                 await _dbRanchoNumber.CreateAsync(ranchoNumber);
                 _response.Result = _mapper.Map<RanchoNumberDTO>(ranchoNumber);
                 _response.StatusCode = HttpStatusCode.Created;
@@ -179,7 +165,6 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
                     return BadRequest(ModelState);
                 }
                 RanchoNumber model = _mapper.Map<RanchoNumber>(updateDTO);
-
                 await _dbRanchoNumber.UpdateAsync(model);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
@@ -193,7 +178,5 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
             }
             return _response;
         }
-
-
     }
 }

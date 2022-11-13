@@ -4,7 +4,6 @@ using MusicRancho_Web.Services.IServices;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
-
 namespace MusicRancho_Web.Services
 {
     public class BaseService : IBaseService
@@ -43,18 +42,13 @@ namespace MusicRancho_Web.Services
                     default:
                         message.Method = HttpMethod.Get;
                         break;
-
                 }
-
                 HttpResponseMessage apiResponse = null;
-
                 if (!string.IsNullOrEmpty(apiRequest.Token))
                 {
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.Token);
                 }
-
                 apiResponse = await client.SendAsync(message);
-
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
                 try
                 {
@@ -76,7 +70,6 @@ namespace MusicRancho_Web.Services
                 }
                 var APIResponse = JsonConvert.DeserializeObject<T>(apiContent);
                 return APIResponse;
-
             }
             catch(Exception e)
             {

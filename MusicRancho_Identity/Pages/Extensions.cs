@@ -1,13 +1,9 @@
 // Copyright (c) Duende Software. All rights reserved.
-
-
 using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
 namespace UI.Pages;
-
 public static class Extensions
 {
     public static async Task<bool> GetSchemeSupportsSignOutAsync(this HttpContext context, string scheme)
@@ -25,7 +21,6 @@ public static class Extensions
     {
         page.HttpContext.Response.StatusCode = 200;
         page.HttpContext.Response.Headers["Location"] = "";
-
         return page.RedirectToPage("/Redirect/Index", new { RedirectUri = redirectUri });
     }
 }

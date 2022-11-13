@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-
 namespace MusicRancho_Identity.Pages.Account.Register
 {
     public class RegisterViewModel
@@ -9,10 +8,7 @@ namespace MusicRancho_Identity.Pages.Account.Register
         public string Name { get; set; }
         [Required]
         public string Password { get; set; }
-
         public string ReturnUrl { get; set; }
         public string RoleName { get; set; }
-
-
     }
 }

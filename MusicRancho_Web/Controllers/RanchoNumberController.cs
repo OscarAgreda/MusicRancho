@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Data;
-
 namespace MusicRancho_Web.Controllers
 {
     public class RanchoNumberController : Controller
@@ -26,11 +25,9 @@ namespace MusicRancho_Web.Controllers
             _mapper = mapper;
             _ranchoService = ranchoService;
         }
-
         public async Task<IActionResult> IndexRanchoNumber()
         {
             List<RanchoNumberDTO> list = new();
-
             var response = await _ranchoNumberService.GetAllAsync<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
             if (response != null && response.IsSuccess)
             {
@@ -61,7 +58,6 @@ namespace MusicRancho_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var response = await _ranchoNumberService.CreateAsync<APIResponse>(model.RanchoNumber, await HttpContext.GetTokenAsync("access_token"));
                 if (response != null && response.IsSuccess)
                 {
@@ -75,7 +71,6 @@ namespace MusicRancho_Web.Controllers
                     }
                 }
             }
-
             var resp = await _ranchoService.GetAllAsync<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
             if (resp != null && resp.IsSuccess)
             {
@@ -98,7 +93,6 @@ namespace MusicRancho_Web.Controllers
                 RanchoNumberDTO model = JsonConvert.DeserializeObject<RanchoNumberDTO>(Convert.ToString(response.Result));
                 ranchoNumberVM.RanchoNumber =  _mapper.Map<RanchoNumberUpdateDTO>(model);
             }
-
             response = await _ranchoService.GetAllAsync<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
             if (response != null && response.IsSuccess)
             {
@@ -110,8 +104,6 @@ namespace MusicRancho_Web.Controllers
                     }); 
                 return View(ranchoNumberVM);
             }
-
-
             return NotFound();
         }
         [Authorize(Roles = "admin")]
@@ -121,7 +113,6 @@ namespace MusicRancho_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var response = await _ranchoNumberService.UpdateAsync<APIResponse>(model.RanchoNumber, await HttpContext.GetTokenAsync("access_token"));
                 if (response != null && response.IsSuccess)
                 {
@@ -135,7 +126,6 @@ namespace MusicRancho_Web.Controllers
                     }
                 }
             }
-
             var resp = await _ranchoService.GetAllAsync<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
             if (resp != null && resp.IsSuccess)
             {
@@ -158,7 +148,6 @@ namespace MusicRancho_Web.Controllers
                 RanchoNumberDTO model = JsonConvert.DeserializeObject<RanchoNumberDTO>(Convert.ToString(response.Result));
                 ranchoNumberVM.RanchoNumber = model;
             }
-
             response = await _ranchoService.GetAllAsync<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
             if (response != null && response.IsSuccess)
             {
@@ -170,8 +159,6 @@ namespace MusicRancho_Web.Controllers
                     });
                 return View(ranchoNumberVM);
             }
-
-
             return NotFound();
         }
         [Authorize(Roles = "admin")]
@@ -179,17 +166,12 @@ namespace MusicRancho_Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteRanchoNumber(RanchoNumberDeleteVM model)
         {
-
             var response = await _ranchoNumberService.DeleteAsync<APIResponse>(model.RanchoNumber.RanchoNo, await HttpContext.GetTokenAsync("access_token"));
             if (response != null && response.IsSuccess)
             {
                 return RedirectToAction(nameof(IndexRanchoNumber));
             }
-
             return View(model);
         }
-
-
-
     }
 }

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authorization;
-
 namespace MusicRancho_Identity.Policies
 {
     public class MinimumAgeRequirement : IAuthorizationRequirement

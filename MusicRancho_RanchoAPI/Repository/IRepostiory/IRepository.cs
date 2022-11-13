@@ -1,6 +1,5 @@
 using MusicRancho_RanchoAPI.Models;
 using System.Linq.Expressions;
-
 namespace MusicRancho_RanchoAPI.Repository.IRepostiory
 {
     public interface IRepository<T> where T : class

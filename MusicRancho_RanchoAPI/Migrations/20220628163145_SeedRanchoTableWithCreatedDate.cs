@@ -1,8 +1,6 @@
 using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-
 #nullable disable
-
 namespace MusicRancho_RanchoAPI.Migrations
 {
     public partial class SeedRanchoTableWithCreatedDate : Migration
@@ -15,28 +13,24 @@ namespace MusicRancho_RanchoAPI.Migrations
                 keyValue: 1,
                 column: "CreatedDate",
                 value: new DateTime(2022, 6, 28, 11, 31, 45, 726, DateTimeKind.Local).AddTicks(6002));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedDate",
                 value: new DateTime(2022, 6, 28, 11, 31, 45, 726, DateTimeKind.Local).AddTicks(6048));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "CreatedDate",
                 value: new DateTime(2022, 6, 28, 11, 31, 45, 726, DateTimeKind.Local).AddTicks(6051));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "CreatedDate",
                 value: new DateTime(2022, 6, 28, 11, 31, 45, 726, DateTimeKind.Local).AddTicks(6055));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
@@ -52,28 +46,24 @@ namespace MusicRancho_RanchoAPI.Migrations
                 keyValue: 1,
                 column: "CreatedDate",
                 value: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedDate",
                 value: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "CreatedDate",
                 value: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "CreatedDate",
                 value: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",

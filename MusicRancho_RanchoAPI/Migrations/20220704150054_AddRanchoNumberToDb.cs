@@ -1,8 +1,6 @@
 using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-
 #nullable disable
-
 namespace MusicRancho_RanchoAPI.Migrations
 {
     public partial class AddRanchoNumberToDb : Migration
@@ -22,35 +20,30 @@ namespace MusicRancho_RanchoAPI.Migrations
                 {
                     table.PrimaryKey("PK_RanchoNumbers", x => x.RanchoNo);
                 });
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 4, 10, 0, 54, 527, DateTimeKind.Local).AddTicks(8155));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 4, 10, 0, 54, 527, DateTimeKind.Local).AddTicks(8267));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 4, 10, 0, 54, 527, DateTimeKind.Local).AddTicks(8270));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "CreatedDate",
                 value: new DateTime(2022, 7, 4, 10, 0, 54, 527, DateTimeKind.Local).AddTicks(8272));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
@@ -62,35 +55,30 @@ namespace MusicRancho_RanchoAPI.Migrations
         {
             migrationBuilder.DropTable(
                 name: "RanchoNumbers");
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "CreatedDate",
                 value: new DateTime(2022, 6, 28, 11, 31, 45, 726, DateTimeKind.Local).AddTicks(6002));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "CreatedDate",
                 value: new DateTime(2022, 6, 28, 11, 31, 45, 726, DateTimeKind.Local).AddTicks(6048));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "CreatedDate",
                 value: new DateTime(2022, 6, 28, 11, 31, 45, 726, DateTimeKind.Local).AddTicks(6051));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",
                 keyValue: 4,
                 column: "CreatedDate",
                 value: new DateTime(2022, 6, 28, 11, 31, 45, 726, DateTimeKind.Local).AddTicks(6055));
-
             migrationBuilder.UpdateData(
                 table: "Ranchos",
                 keyColumn: "Id",

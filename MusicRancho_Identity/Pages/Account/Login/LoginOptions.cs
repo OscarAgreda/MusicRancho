@@ -1,5 +1,4 @@
 namespace UI.Pages.Login;
-
 public class LoginOptions
 {
     public static bool AllowLocalLogin = true;

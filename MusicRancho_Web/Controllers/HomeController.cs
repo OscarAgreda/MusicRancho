@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Diagnostics;
-
 namespace MusicRancho_Web.Controllers
 {
     public class HomeController : Controller
@@ -19,11 +18,9 @@ namespace MusicRancho_Web.Controllers
             _ranchoService = ranchoService;
             _mapper = mapper;
         }
-
         public async Task<IActionResult> Index()
         {
             List<RanchoDTO> list = new();
-
             var response = await _ranchoService.GetAllAsync<APIResponse>(await HttpContext.GetTokenAsync("access_token"));
             if (response != null && response.IsSuccess)
             {
@@ -31,6 +28,5 @@ namespace MusicRancho_Web.Controllers
             }
             return View(list);
         }
-       
     }
 }
