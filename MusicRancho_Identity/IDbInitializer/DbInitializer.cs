@@ -20,10 +20,12 @@ namespace MusicRancho_Identity.IDbInitializer
         public void Initialize()
         {
             // may need to not check is true the first time ever
-
-            _roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
-            _roleManager.CreateAsync(new IdentityRole(SD.Customer)).GetAwaiter().GetResult();
-
+            if (_roleManager.FindByNameAsync(SD.Admin).Result == null)
+            {
+                _roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Customer)).GetAwaiter().GetResult();
+            }
+            else { return; }
             // here is the admin user
             ApplicationUser adminUser = new()
             {
