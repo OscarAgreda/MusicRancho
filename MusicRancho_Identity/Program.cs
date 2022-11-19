@@ -2,7 +2,7 @@
 //https://github.com/skoruba/Duende.IdentityServer.Admin
 //https://github.com/skoruba/Duende.IdentityServer.Admin/blob/main/docs/Configure-Administration.md
 // remember to run in Nuget Package Console the following command:
-//dotnet ef database update -c ApplicationDbContext --project .\MusicRancho_Identity
+//dotnet ef database update -c IdentityDbContext --project .\MusicRancho_Identity
 // dotnet ef database update -c ApplicationDbContext --project .\MusicRancho_RanchoAPI
 using Duende.IdentityServer.Services;
 using MusicRancho_Identity;
@@ -17,10 +17,10 @@ using Duende.IdentityServer;
 using IdentityModel;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<IdentityDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-.AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+.AddEntityFrameworkStores<IdentityDbContext>().AddDefaultTokenProviders();
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();

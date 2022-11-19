@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Reflection.Emit;
 namespace MusicRancho_Identity.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class IdentityDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
 : base(options)
-{
-}
+        {
+        }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

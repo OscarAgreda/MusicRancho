@@ -75,6 +75,10 @@ AllowOfflineAccess = true,
 RedirectUris={ "https://localhost:7002/signin-oidc" },
 PostLogoutRedirectUris={"https://localhost:7002/signout-callback-oidc" },
 }
+
+// blazor wasm 
+//https://docs.duendesoftware.com/identityserver/v6/quickstarts/7_blazor/
+//https://github.com/DuendeSoftware/Samples/tree/main/IdentityServer/v6/BFF/BlazorWasm
         };
     }
 }

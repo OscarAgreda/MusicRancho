@@ -8,10 +8,10 @@ namespace MusicRancho_Identity.IDbInitializer
 {
     public class DbInitializer : IDbInitializer
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IdentityDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public DbInitializer(ApplicationDbContext db, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public DbInitializer(IdentityDbContext db, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _db = db;
             _roleManager = roleManager;
@@ -20,12 +20,10 @@ namespace MusicRancho_Identity.IDbInitializer
         public void Initialize()
         {
             // may need to not check is true the first time ever
-            if (_roleManager.FindByNameAsync(SD.Admin).Result == null)
-            {
-                _roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Customer)).GetAwaiter().GetResult();
-            }
-            else { return; }
+
+            _roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
+            _roleManager.CreateAsync(new IdentityRole(SD.Customer)).GetAwaiter().GetResult();
+
             // here is the admin user
             ApplicationUser adminUser = new()
             {

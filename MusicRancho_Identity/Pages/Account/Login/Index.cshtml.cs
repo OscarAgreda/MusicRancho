@@ -19,7 +19,7 @@ public class Index : PageModel
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly RoleManager<IdentityRole> _roleManager;
-    private readonly ApplicationDbContext _db;
+    private readonly IdentityDbContext _db;
     private readonly IIdentityServerInteractionService _interaction;
     private readonly IEventService _events;
     private readonly IAuthenticationSchemeProvider _schemeProvider;
@@ -35,7 +35,7 @@ public class Index : PageModel
         UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<IdentityRole> roleInManager,
-            ApplicationDbContext db)
+            IdentityDbContext db)
     {
         _interaction = interaction;
         _schemeProvider = schemeProvider;
