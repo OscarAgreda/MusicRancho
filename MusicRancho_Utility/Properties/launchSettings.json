@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "MusicRancho_Utility": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:3628;http://localhost:3629"
+    }
+  }
+}

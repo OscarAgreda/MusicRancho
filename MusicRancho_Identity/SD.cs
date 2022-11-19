@@ -59,22 +59,22 @@ AllowedScopes = { "music", "api1", "api2.read_only", IdentityServerConstants.Loc
 },
 new Client
 {
-ClientId = "music",
-RequireClientSecret = false,
-AccessTokenLifetime = 900,
-ClientSecrets = { new Secret("secret".Sha256()) },
-AllowedGrantTypes = GrantTypes.Code,
-AlwaysIncludeUserClaimsInIdToken = true,
-AllowedScopes = { "music",
-IdentityServerConstants.StandardScopes.OpenId,
-IdentityServerConstants.StandardScopes.Profile,
-IdentityServerConstants.StandardScopes.Email,
-JwtClaimTypes.Role
-},
-AllowOfflineAccess = true,
-RedirectUris={ "https://localhost:7002/signin-oidc" },
-PostLogoutRedirectUris={"https://localhost:7002/signout-callback-oidc" },
-}
+                ClientId = "music",
+                RequireClientSecret = false,
+                AccessTokenLifetime = 900,
+                ClientSecrets = { new Secret("secret".Sha256()) },
+                AllowedGrantTypes = GrantTypes.Code,
+                AlwaysIncludeUserClaimsInIdToken = true,
+                AllowedScopes = { "music",
+                IdentityServerConstants.StandardScopes.OpenId,
+                IdentityServerConstants.StandardScopes.Profile,
+                IdentityServerConstants.StandardScopes.Email,
+                JwtClaimTypes.Role
+            },
+                    AllowOfflineAccess = true,
+                    RedirectUris={ "https://localhost:7002/signin-oidc" },
+                    PostLogoutRedirectUris={"https://localhost:7002/signout-callback-oidc" },
+            }
 
 // blazor wasm 
 //https://docs.duendesoftware.com/identityserver/v6/quickstarts/7_blazor/

@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 namespace MusicRancho_RanchoAPI.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {
         }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        // public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         // public DbSet<LocalUser> LocalUsers { get; set; }
         public DbSet<Rancho> Ranchos { get; set; }
         public DbSet<RanchoNumber> RanchoNumbers { get; set; }
