@@ -26,10 +26,12 @@ builder
 builder
     .Services
     .AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<IdentityDbContext>().AddDefaultTokenProviders()
+    .AddEntityFrameworkStores<IdentityDbContext>()
+    .AddDefaultTokenProviders()
     ;
 
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
 
@@ -75,7 +77,7 @@ app.UseAuthorization();
 
 app
     .MapRazorPages()
-    .RequireAuthorization() // then the register page will not work
+    //.RequireAuthorization() // then the register page will not work
     ;
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
