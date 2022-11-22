@@ -24,7 +24,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MusicRancho_Identity;
 using MusicRancho_Identity.Data;
-using MusicRancho_Identity.IDbInitializer;
+using MusicRancho_Identity.Data.Initializers;
+using MusicRancho_Identity.Data.Initializers.Contracts;
 using MusicRancho_Identity.Models;
 using MusicRancho_Identity.Policies;
 

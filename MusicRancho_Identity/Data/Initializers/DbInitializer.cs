@@ -4,7 +4,9 @@ using MusicRancho_Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.VisualBasic;
-namespace MusicRancho_Identity.IDbInitializer
+using MusicRancho_Identity.Data.Initializers.Contracts;
+
+namespace MusicRancho_Identity.Data.Initializers
 {
     public class DbInitializer : IDbInitializer
     {

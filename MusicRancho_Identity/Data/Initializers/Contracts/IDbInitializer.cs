@@ -1,4 +1,4 @@
-namespace MusicRancho_Identity.IDbInitializer
+namespace MusicRancho_Identity.Data.Initializers.Contracts
 {
     public interface IDbInitializer
     {
