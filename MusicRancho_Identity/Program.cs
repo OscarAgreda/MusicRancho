@@ -28,6 +28,7 @@ using MusicRancho_Identity.Data.Initializers;
 using MusicRancho_Identity.Data.Initializers.Contracts;
 using MusicRancho_Identity.Models;
 using MusicRancho_Identity.Policies;
+using MusicRancho_Identity.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

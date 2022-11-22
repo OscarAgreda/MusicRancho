@@ -6,7 +6,8 @@ using MusicRancho_Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Data;
-namespace MusicRancho_Identity
+
+namespace MusicRancho_Identity.Services
 {
     public class ProfileService : IProfileService
     {
