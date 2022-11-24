@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using MusicRancho_Web;
 using MusicRancho_Web.Services;
-using MusicRancho_Web.Services.IServices;
+using MusicRancho_Web.Services.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
