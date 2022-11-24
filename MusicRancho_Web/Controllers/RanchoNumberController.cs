@@ -38,7 +38,7 @@ namespace MusicRancho_Web.Controllers
             return View(list);
         }
 
-        [Authorize(Policy = "Administrator")]
+        [Authorize(Policy = "Employee")]
         public async Task<IActionResult> CreateRanchoNumber()
         {
             RanchoNumberCreateVM ranchoNumberVM = new();
@@ -58,7 +58,7 @@ namespace MusicRancho_Web.Controllers
             return View(ranchoNumberVM);
         }
 
-        [Authorize(Policy = "Administrator")]
+        [Authorize(Policy = "Employee")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateRanchoNumber(RanchoNumberCreateVM model)
@@ -95,7 +95,7 @@ namespace MusicRancho_Web.Controllers
             return View(model);
         }
 
-        [Authorize(Policy = "Administrator")]
+        [Authorize(Policy = "Employee")]
         public async Task<IActionResult> UpdateRanchoNumber(int ranchoNo)
         {
             RanchoNumberUpdateVM ranchoNumberVM = new();
@@ -125,7 +125,7 @@ namespace MusicRancho_Web.Controllers
             return NotFound();
         }
 
-        [Authorize(Policy = "Administrator")]
+        [Authorize(Policy = "Employee")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateRanchoNumber(RanchoNumberUpdateVM model)
@@ -161,7 +161,7 @@ namespace MusicRancho_Web.Controllers
             return View(model);
         }
 
-        [Authorize(Policy = "Administrator")]
+        [Authorize(Policy = "Employee")]
         public async Task<IActionResult> DeleteRanchoNumber(int ranchoNo)
         {
             RanchoNumberDeleteVM ranchoNumberVM = new();
@@ -191,7 +191,7 @@ namespace MusicRancho_Web.Controllers
             return NotFound();
         }
 
-        [Authorize(Policy = "Administrator")]
+        [Authorize(Policy = "Employee")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteRanchoNumber(RanchoNumberDeleteVM model)

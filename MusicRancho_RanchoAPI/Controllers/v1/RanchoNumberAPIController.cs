@@ -1,10 +1,11 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MusicRancho_RanchoAPI.Models;
 using MusicRancho_RanchoAPI.Models.Dto;
 using MusicRancho_RanchoAPI.Repository.IRepostiory;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using System.Net;
+
 namespace MusicRancho_RanchoAPI.Controllers.v1
 {
     [Route("api/v{version:apiVersion}/RanchoNumberAPI")]
@@ -16,6 +17,7 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
         private readonly IRanchoNumberRepository _dbRanchoNumber;
         private readonly IRanchoRepository _dbRancho;
         private readonly IMapper _mapper;
+        
         public RanchoNumberAPIController(IRanchoNumberRepository dbRanchoNumber, IMapper mapper,
             IRanchoRepository dbRancho)
         {
@@ -24,11 +26,13 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
             _response = new();
             _dbRancho = dbRancho;
         }
+        
         [HttpGet("GetString")]
         public IEnumerable<string> Get()
         {
             return new string[] { "String1", "string2" };
         }
+        
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<APIResponse>> GetRanchoNumbers()
@@ -46,8 +50,10 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
                 _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
             }
+
             return _response;
         }
+        
         [HttpGet("{id:int}", Name = "GetRanchoNumber")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -61,25 +67,29 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
                     _response.StatusCode = HttpStatusCode.BadRequest;
                     return BadRequest(_response);
                 }
+
                 var ranchoNumber = await _dbRanchoNumber.GetAsync(u => u.RanchoNo == id);
+                
                 if (ranchoNumber == null)
                 {
                     _response.StatusCode = HttpStatusCode.NotFound;
                     return NotFound(_response);
                 }
+                
                 _response.Result = _mapper.Map<RanchoNumberDTO>(ranchoNumber);
                 _response.StatusCode = HttpStatusCode.OK;
+                
                 return Ok(_response);
             }
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages
-                     = new List<string>() { ex.ToString() };
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
             return _response;
         }
-        [Authorize(Roles = "admin")]
+        
+        [Authorize(Policy = "Employee")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -93,19 +103,23 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
                     ModelState.AddModelError("ErrorMessages", "Rancho Number already Exists!");
                     return BadRequest(ModelState);
                 }
+
                 if (await _dbRancho.GetAsync(u => u.Id == createDTO.RanchoID) == null)
                 {
                     ModelState.AddModelError("ErrorMessages", "Rancho ID is Invalid!");
                     return BadRequest(ModelState);
                 }
+
                 if (createDTO == null)
                 {
                     return BadRequest(createDTO);
                 }
+
                 RanchoNumber ranchoNumber = _mapper.Map<RanchoNumber>(createDTO);
                 await _dbRanchoNumber.CreateAsync(ranchoNumber);
                 _response.Result = _mapper.Map<RanchoNumberDTO>(ranchoNumber);
                 _response.StatusCode = HttpStatusCode.Created;
+                
                 return CreatedAtRoute("GetRancho", new { id = ranchoNumber.RanchoNo }, _response);
             }
             catch (Exception ex)
@@ -114,9 +128,11 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
                 _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
             }
+
             return _response;
         }
-        [Authorize(Roles = "admin")]
+
+        [Authorize(Policy = "Employee")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -129,25 +145,30 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
                 {
                     return BadRequest();
                 }
+
                 var ranchoNumber = await _dbRanchoNumber.GetAsync(u => u.RanchoNo == id);
+                
                 if (ranchoNumber == null)
                 {
                     return NotFound();
                 }
+                
                 await _dbRanchoNumber.RemoveAsync(ranchoNumber);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
+                
                 return Ok(_response);
             }
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages
-                     = new List<string>() { ex.ToString() };
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
+
             return _response;
         }
-        [Authorize(Roles = "admin")]
+
+        [Authorize(Policy = "Employee")]
         [HttpPut("{id:int}", Name = "UpdateRanchoNumber")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -159,23 +180,26 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
                 {
                     return BadRequest();
                 }
+
                 if (await _dbRancho.GetAsync(u => u.Id == updateDTO.RanchoID) == null)
                 {
                     ModelState.AddModelError("ErrorMessages", "Rancho ID is Invalid!");
                     return BadRequest(ModelState);
                 }
+
                 RanchoNumber model = _mapper.Map<RanchoNumber>(updateDTO);
                 await _dbRanchoNumber.UpdateAsync(model);
                 _response.StatusCode = HttpStatusCode.NoContent;
                 _response.IsSuccess = true;
+                
                 return Ok(_response);
             }
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages
-                     = new List<string>() { ex.ToString() };
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
+
             return _response;
         }
     }

@@ -75,6 +75,10 @@ builder.Services.AddAuthorization(options =>
     {
         policy.RequireRole("admin");
     });
+    options.AddPolicy("Employee", policy =>
+    {
+        policy.RequireRole("employee");        
+    });
 });
 
 builder.Services.AddSession(options =>

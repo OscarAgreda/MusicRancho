@@ -1,7 +1,8 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using MusicRancho_RanchoAPI.Models;
 using MusicRancho_RanchoAPI.Repository.IRepostiory;
-using Microsoft.AspNetCore.Mvc;
+
 namespace MusicRancho_RanchoAPI.Controllers.v2
 {
     [Route("api/v{version:apiVersion}/RanchoNumberAPI")]
@@ -13,6 +14,7 @@ namespace MusicRancho_RanchoAPI.Controllers.v2
         private readonly IRanchoNumberRepository _dbRanchoNumber;
         private readonly IRanchoRepository _dbRancho;
         private readonly IMapper _mapper;
+        
         public RanchoNumberAPIController(IRanchoNumberRepository dbRanchoNumber, IMapper mapper,
             IRanchoRepository dbRancho)
         {
@@ -21,6 +23,7 @@ namespace MusicRancho_RanchoAPI.Controllers.v2
             _response = new();
             _dbRancho = dbRancho;
         }
+
         [HttpGet("GetString")]
         public IEnumerable<string> Get()
         {
