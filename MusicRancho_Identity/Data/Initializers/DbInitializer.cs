@@ -25,6 +25,7 @@ namespace MusicRancho_Identity.Data.Initializers
             if (_roleManager.FindByNameAsync(SD.Admin).Result == null)
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Employee)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Customer)).GetAwaiter().GetResult();
             }
             else
@@ -85,6 +86,46 @@ namespace MusicRancho_Identity.Data.Initializers
                 new Claim(JwtClaimTypes.Name,customerUser.Name),
                 new Claim(JwtClaimTypes.Role,SD.Customer)
             }).Result;
-        }
+
+            ApplicationUser employeeUser = new()
+            {
+                UserName = "employee1@gmail.com",
+                Email = "employee1@gmail.com",
+                EmailConfirmed = true,
+                PhoneNumber = "22222222",
+                Name = "José Rivera Employee"
+            };
+
+            _userManager.CreateAsync(employeeUser, "Admin123*").GetAwaiter().GetResult();
+            _userManager.AddToRoleAsync(employeeUser, SD.Employee).GetAwaiter().GetResult();
+            
+            var x = _userManager.AddClaimAsync(employeeUser, new Claim("age", "17")).Result;
+
+            var empIdentityResult = _userManager.AddClaimsAsync(employeeUser, new Claim[]
+            {
+                new Claim(JwtClaimTypes.Name, employeeUser.Name),
+                new Claim(JwtClaimTypes.Role, SD.Employee)                
+            }).Result;
+
+            ApplicationUser employeeUser2 = new()
+            {
+                UserName = "employee2@gmail.com",
+                Email = "employee2@gmail.com",
+                EmailConfirmed = true,
+                PhoneNumber = "22222222",
+                Name = "Daysi Rivera Employee"
+            };
+
+            _userManager.CreateAsync(employeeUser2, "Admin123*").GetAwaiter().GetResult();
+            _userManager.AddToRoleAsync(employeeUser, SD.Employee).GetAwaiter().GetResult();
+
+            var y = _userManager.AddClaimAsync(employeeUser, new Claim("age", "30")).Result;
+
+            var empIdentityResult2 = _userManager.AddClaimsAsync(employeeUser, new Claim[]
+            {
+                new Claim(JwtClaimTypes.Name, employeeUser.Name),
+                new Claim(JwtClaimTypes.Role, SD.Employee)
+            }).Result;
+        }        
     }
 }

@@ -7,6 +7,7 @@ namespace MusicRancho_Identity
     public static class SD
     {
         public const string Admin = "admin";
+        public const string Employee = "employee";
         public const string Customer = "customer";
 
         // https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/identity/
