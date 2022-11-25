@@ -1,38 +1,45 @@
-using MusicRancho_Utility;
-using MusicRancho_Web.Models;
-using MusicRancho_Web.Models.Dto;
-using MusicRancho_Web.Services.IServices;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MusicRancho_Utility;
+using MusicRancho_Web.Models;
+using MusicRancho_Web.Models.Dto;
+using MusicRancho_Web.Services.Contracts;
 using Newtonsoft.Json;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+
 namespace MusicRancho_Web.Controllers
 {
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
+
         public AuthController(IAuthService authService)
         {
             _authService = authService;
         }
+
+        protected async Task<string> GetAccessToken()
+            => await HttpContext.GetTokenAsync("access_token");
+
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Login()
         {
-            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var accessToken = await HttpContext.GetTokenAsync(await GetAccessToken());
             return RedirectToAction(nameof(Index), "Home");
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginRequestDTO obj)
         {
-            APIResponse response = await _authService.LoginAsync<APIResponse>(obj);
+            var response = await _authService.LoginAsync<APIResponse>(obj);
             if (response != null && response.IsSuccess)
             {
-                LoginResponseDTO model = JsonConvert.DeserializeObject<LoginResponseDTO>(Convert.ToString(response.Result));
+                var model = JsonConvert.DeserializeObject<LoginResponseDTO>(Convert.ToString(response.Result));
                 var handler = new JwtSecurityTokenHandler();
                 var jwt = handler.ReadJwtToken(model.Token);
                 var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -49,22 +56,25 @@ namespace MusicRancho_Web.Controllers
                 return View(obj);
             }
         }
+
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterationRequestDTO obj)
         {
-            APIResponse result = await _authService.RegisterAsync<APIResponse>(obj);
+            var result = await _authService.RegisterAsync<APIResponse>(obj);
             if (result != null && result.IsSuccess)
             {
                 return RedirectToAction("Login");
             }
             return View();
         }
+
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
@@ -72,6 +82,7 @@ namespace MusicRancho_Web.Controllers
             HttpContext.Session.SetString(SD.SessionToken, "");
             return RedirectToAction("Index", "Home");
         }
+
         public IActionResult AccessDenied()
         {
             return View();

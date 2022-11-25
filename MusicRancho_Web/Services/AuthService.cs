@@ -1,34 +1,37 @@
 using MusicRancho_Utility;
 using MusicRancho_Web.Models;
 using MusicRancho_Web.Models.Dto;
-using MusicRancho_Web.Services.IServices;
+using MusicRancho_Web.Services.Contracts;
+
 namespace MusicRancho_Web.Services
 {
     public class AuthService : BaseService, IAuthService
     {
-        private readonly IHttpClientFactory _clientFactory;
-        private string ranchoUrl;
-        public AuthService(IHttpClientFactory clientFactory, IConfiguration configuration) : base(clientFactory)
+        private readonly string _ranchoUrl;
+
+        public AuthService(IHttpClientFactory clientFactory, IConfiguration configuration)
+            : base(clientFactory)
         {
-            _clientFactory = clientFactory;
-            ranchoUrl = configuration.GetValue<string>("ServiceUrls:RanchoAPI");
+            _ranchoUrl = configuration.GetValue<string>("ServiceUrls:RanchoAPI");
         }
+
         public Task<T> LoginAsync<T>(LoginRequestDTO obj)
         {
-            return SendAsync<T>(new APIRequest()
+            return SendAsync<T>(new APIRequest
             {
                 ApiType = SD.ApiType.POST,
-                Data = obj,
-                Url = ranchoUrl + "/api/v1/UsersAuth/login"
+                Url = $"{_ranchoUrl}/api/v1/UsersAuth/login",
+                Data = obj
             });
         }
+
         public Task<T> RegisterAsync<T>(RegisterationRequestDTO obj)
         {
-            return SendAsync<T>(new APIRequest()
+            return SendAsync<T>(new APIRequest
             {
                 ApiType = SD.ApiType.POST,
-                Data = obj,
-                Url = ranchoUrl + "/api/v1/UsersAuth/register"
+                Url = $"{_ranchoUrl}/api/v1/UsersAuth/register",
+                Data = obj
             });
         }
     }
