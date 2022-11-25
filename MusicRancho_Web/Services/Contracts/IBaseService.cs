@@ -1,9 +1,10 @@
 using MusicRancho_Web.Models;
-namespace MusicRancho_Web.Services.IServices
+
+namespace MusicRancho_Web.Services.Contracts
 {
     public interface IBaseService
     {
-        APIResponse responseModel { get; set; }
+        APIResponse ResponseModel { get; set; }
         Task<T> SendAsync<T>(APIRequest apiRequest);
     }
 }

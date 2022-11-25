@@ -1,5 +1,6 @@
 using MusicRancho_Web.Models.Dto;
-namespace MusicRancho_Web.Services.IServices
+
+namespace MusicRancho_Web.Services.Contracts
 {
     public interface IRanchoNumberService
     {
