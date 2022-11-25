@@ -169,6 +169,7 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AspManager", policy =>
     {
+        //https://youtu.be/02Yh3sxzAYI?t=2966
         policy.RequireAuthenticatedUser();
         policy.RequireRole("admin");
         policy.RequireClaim("scope", "music");
