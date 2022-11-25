@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
+using MusicRancho_Common.Policies;
 using MusicRancho_Web;
 using MusicRancho_Web.Services;
 using MusicRancho_Web.Services.Contracts;
@@ -79,6 +81,13 @@ builder
         };
     })
     ;
+
+// Adding custom policy
+builder.Services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AtLeast40", policy => policy.Requirements.Add(new MinimumAgeRequirement(40)));
+});
 
 builder.Services.AddSession(options =>
 {

@@ -1,12 +1,13 @@
 using System.Text;
 using IdentityModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using MusicRancho_Identity.Policies;
+using MusicRancho_Common.Policies;
 using MusicRancho_RanchoAPI;
 using MusicRancho_RanchoAPI.Data;
 using MusicRancho_RanchoAPI.Models;
@@ -30,9 +31,10 @@ builder
 
 builder.Services.AddResponseCaching();
 builder.Services.AddScoped<IRanchoRepository, RanchoRepository>();
-
 builder.Services.AddScoped<IRanchoNumberRepository, RanchoNumberRepository>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+builder.Services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
 
 builder.Services.AddApiVersioning(options =>
 {
