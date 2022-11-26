@@ -57,7 +57,7 @@ namespace MusicRancho_Web.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin", Policy = "AtLeast40")]
         public async Task<IActionResult> UpdateRancho(int ranchoId)
         {
             var response = await _ranchoService.GetAsync<APIResponse>(ranchoId, await GetAccessToken());

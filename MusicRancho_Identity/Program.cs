@@ -29,7 +29,6 @@ using MusicRancho_Identity.Data;
 using MusicRancho_Identity.Data.Initializers;
 using MusicRancho_Identity.Data.Initializers.Contracts;
 using MusicRancho_Identity.Models;
-using MusicRancho_Identity.Policies;
 using MusicRancho_Identity.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,7 +50,6 @@ builder
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
 
 builder
     .Services

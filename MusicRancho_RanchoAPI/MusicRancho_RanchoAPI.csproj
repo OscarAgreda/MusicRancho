@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MusicRancho_Common\MusicRancho_Common.csproj" />
     <ProjectReference Include="..\MusicRancho_Identity\MusicRancho_Identity.csproj" />
   </ItemGroup>
 
