@@ -82,7 +82,7 @@ public class Index : PageModel
             {
                 var user = _db.ApplicationUsers.FirstOrDefault(u => u.UserName.ToLower()==Input.Username.ToLower());
                 await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id, user.UserName, clientId: context?.Client.ClientId));
-                AuthenticationProperties props = null;
+                AuthenticationProperties? props = null;
                 if (LoginOptions.AllowRememberLogin && Input.RememberLogin)
                 {
                     props = new AuthenticationProperties
