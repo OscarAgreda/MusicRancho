@@ -47,7 +47,7 @@ public class Consent : PageModel
             _logger.LogError("Invalid id {id}", Input.Id);
             return RedirectToPage("/Home/Error/Index");
         }
-        CompleteBackchannelLoginRequest result = null;
+        CompleteBackchannelLoginRequest? result = null;
         if (Input?.Button == "no")
         {
             result = new CompleteBackchannelLoginRequest(Input.Id);

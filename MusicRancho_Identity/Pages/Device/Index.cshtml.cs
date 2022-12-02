@@ -58,7 +58,7 @@ public class Index : PageModel
     {
         var request = await _interaction.GetAuthorizationContextAsync(Input.UserCode);
         if (request == null) return RedirectToPage("/Home/Error/Index");
-        ConsentResponse grantedConsent = null;
+        ConsentResponse? grantedConsent = null;
         if (Input.Button == "no")
         {
             grantedConsent = new ConsentResponse
