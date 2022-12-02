@@ -55,7 +55,7 @@ public class Index : PageModel
             if (Input.ScopesConsented != null && Input.ScopesConsented.Any())
             {
                 var scopes = Input.ScopesConsented;
-                if (ConsentOptions.EnableOfflineAccess == false)
+                if (!ConsentOptions.EnableOfflineAccess)
                 {
                     scopes = scopes.Where(x => x != Duende.IdentityServer.IdentityServerConstants.StandardScopes.OfflineAccess);
                 }
@@ -79,7 +79,7 @@ public class Index : PageModel
         if (grantedConsent != null)
         {
             await _interaction.GrantConsentAsync(request, grantedConsent);
-            if (request.IsNativeClient() == true)
+            if (request.IsNativeClient())
             {
                 return this.LoadingPage(Input.ReturnUrl);
             }
