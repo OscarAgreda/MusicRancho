@@ -58,7 +58,7 @@ public class Consent : PageModel
             if (Input.ScopesConsented != null && Input.ScopesConsented.Any())
             {
                 var scopes = Input.ScopesConsented;
-                if (ConsentOptions.EnableOfflineAccess == false)
+                if (!ConsentOptions.EnableOfflineAccess)
                 {
                     scopes = scopes.Where(x => x != Duende.IdentityServer.IdentityServerConstants.StandardScopes.OfflineAccess);
                 }
