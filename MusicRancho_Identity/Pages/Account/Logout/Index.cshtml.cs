@@ -41,7 +41,7 @@ public class Index : PageModel
                 showLogoutPrompt = false;
             }
         }
-        if (showLogoutPrompt == false)
+        if (!showLogoutPrompt)
         {
             return await OnPost();
         }
