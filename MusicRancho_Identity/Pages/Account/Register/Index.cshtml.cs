@@ -61,7 +61,7 @@ namespace MusicRancho_Identity.Pages.Account.Register
                         await _roleManager.CreateAsync(userRole);
                     }
                     await _userManager.AddToRoleAsync(user, Input.RoleName);
-                    await _userManager.AddClaimsAsync(user, new Claim[] {
+                    await _userManager.AddClaimsAsync(user, new[]{
                         new Claim(JwtClaimTypes.Name,Input.Email),
                         new Claim(JwtClaimTypes.Email,Input.Email),
                         new Claim(JwtClaimTypes.Role,Input.RoleName)

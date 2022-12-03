@@ -178,7 +178,7 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("age");
         policy.RequireClaim("primercarro", "hondacivic");
         policy.RequireClaim("marca_de_carro");
-        policy.RequireRole(new string[] { "admin", "superuser", "geek" });
+        policy.RequireRole(new[]{ "admin", "superuser", "geek" });
     });
 
     // ref: https://www.google.com/search?q=HandleRequirementAsync(AuthorizationHandlerContext

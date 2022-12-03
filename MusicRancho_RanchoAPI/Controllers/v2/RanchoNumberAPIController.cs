@@ -24,7 +24,7 @@ namespace MusicRancho_RanchoAPI.Controllers.v2
         [HttpGet("GetString")]
         public IEnumerable<string> Get()
         {
-            return new string[] { "Bhrugen", "DotNetMastery" };
+            return new[]{ "Bhrugen", "DotNetMastery" };
         }
     }
 }
