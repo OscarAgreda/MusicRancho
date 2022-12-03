@@ -52,15 +52,13 @@ namespace MusicRancho_Identity.Data.Initializers
             var c = _userManager.AddClaimAsync(adminUser, new Claim(JwtClaimTypes.Role, SD.Admin)).Result;
             var d = _userManager.AddClaimAsync(adminUser, new Claim("age", "35")).Result;
 
-            var clIdentityResult1 = _userManager.AddClaimsAsync(adminUser, new Claim[]
-            {
+            var clIdentityResult1 = _userManager.AddClaimsAsync(adminUser, new[]            {
                 new Claim("role","superuser"),
                 new Claim("mandate","IsRootAdmin"),
                 new Claim("marca_de_carro","Toyota"),
             }).Result;
 
-            var myClaims2 = new Claim[]
-            {
+            var myClaims2 = new[]            {
                 new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                 new Claim(JwtClaimTypes.Role, "geek"),
                 new Claim(JwtClaimTypes.WebSite, "oscarsite")
@@ -80,8 +78,7 @@ namespace MusicRancho_Identity.Data.Initializers
             _userManager.CreateAsync(customerUser, "Admin123*").GetAwaiter().GetResult();
             _userManager.AddToRoleAsync(customerUser, SD.Customer).GetAwaiter().GetResult();
 
-            var clIdentityResult2 = _userManager.AddClaimsAsync(customerUser, new Claim[]
-            {
+            var clIdentityResult2 = _userManager.AddClaimsAsync(customerUser, new[]            {
                 new Claim(JwtClaimTypes.Name,customerUser.Name),
                 new Claim(JwtClaimTypes.Role,SD.Customer)
             }).Result;

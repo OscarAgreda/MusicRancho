@@ -27,7 +27,7 @@ namespace MusicRancho_RanchoAPI.Controllers.v1
         [HttpGet("GetString")]
         public IEnumerable<string> Get()
         {
-            return new string[] { "String1", "string2" };
+            return new[]{ "String1", "string2" };
         }
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
